@@ -1,0 +1,55 @@
+<div class="container">
+    <div class="row">
+        <section class="col-3">
+            <h5 class="text-warning" style="margin-left: 3%;">Sort</h5>
+            <select class="form-select form-select-lg mb-3" (change)="onSortSelected($event.target.value)">
+                <!-- <option>Alphabetical</option>
+                <option>Price : Low to High</option>
+                <option>Price : High to Low</option> -->
+                <option *ngFor="let item of sortOptions" [value]="item.value">{{item.name}}</option>
+            </select>
+
+            <h5 class="text-warning" style="margin-left: 3%;">Brands</h5>
+            <ul class="list-group mb-3">
+                <li class="list-group-item" aria-current="true" *ngFor="let item of brands"
+                    [class.active]="item.id === this.shopParams.brandId" [value]="item.id"
+                    (click)="onBrandSelected(item.id)">
+                    {{item.name}}</li>
+            </ul>
+            <h5 class="text-warning" style="margin-left: 3%;">Types</h5>
+            <ul class="list-group mb-3">
+                <li class="list-group-item" aria-current="true" *ngFor="let item of types"
+                    [class.active]="item.id === this.shopParams.typeId" [value]="item.id"
+                    (click)="onTypeSelected(item.id)">
+                    {{item.name}}</li>
+            </ul>
+        </section>
+        <section class="col-9">
+            <div class="d-flex justify-content-between align-items-center pb-2" style="padding-bottom: 2%;">
+
+                <app-paging-header [totalProducts]="totalProducts" [pageNumber]="shopParams.pageNumber"
+                    [pageSize]="shopParams.pageSize"></app-paging-header>
+
+                <div class="flex-center">
+                    <input (keyup.enter)="onSearch()" #search class="form-control" type="text" style="width: 300px; height: 50px; margin-right: 10px;"
+                        placeholder="Search">
+                    <button class="btn btn-outline-primary" style="margin: 2% 0 2% 0;" (click)="onSearch()">Search</button>
+                    <button class="btn btn-outline-success" style="margin: 2% 0 2% 2%;" (click)="onReset()">Reset</button>
+                </div>
+            </div>
+
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+                <div class="col" *ngFor="let item of products">
+                    <app-product-item [product]="item"></app-product-item>
+                </div>
+            </div>
+            <div class="flex-center" style="margin-top: 3%;" *ngIf="totalProducts > 0">
+                <!-- <pagination [boundaryLinks]="true" [totalItems]="this.totalProducts" previousText="&lsaquo;"
+                    nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;" (pageChanged)="onPageChanged($event)"
+                    [itemsPerPage]="this.shopParams.pageSize">
+                </pagination> -->
+                <app-paging [pageSize]="this.shopParams.pageSize" [totalProducts]="totalProducts" (pageChanged)="onPageChanged($event)"></app-paging>
+            </div>
+        </section>
+    </div>
+</div>

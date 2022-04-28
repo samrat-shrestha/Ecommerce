@@ -1,0 +1,16 @@
+<div class="card shadow-sm">
+    <img src="{{product.pictureUrl}}" alt="{{product.name}}" class="img-fluid">
+
+    <div class="product-card">
+        <a routerLink="/shop/{{product.id}}">
+            <h6 class="text-uppercase">{{product.name}}</h6>
+        </a>
+        <span>{{product.price | currency}}</span>
+
+        <div class="btn-group" style="margin-top: 2%;">
+            <button (click)="addItemToBasket()" type="button" class="btn btn btn-outline-secondary fa fa-shopping-cart mr-2"></button>
+            <button type="button" class="btn btn btn-outline-secondary" routerLink="/shop/{{product.id}}" >View</button>
+        </div>
+
+    </div>
+</div>

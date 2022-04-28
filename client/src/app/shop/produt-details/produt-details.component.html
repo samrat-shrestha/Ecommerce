@@ -1,0 +1,21 @@
+<div *ngIf="product" class="row">
+    <div class="col-6">
+        <img src="{{product.pictureUrl}}" alt="{{product.name}}" class="img-fluid w-100">
+    </div>
+    <div class="col-6">
+        <h3>{{product.name}}</h3>
+        <p>{{product.price | currency}}</p>
+        <div class="add-to-cart">
+            <i class="fa fa-minus-circle text-warning" style="cursor: pointer; font-size: 2em;margin-right: 2%;" (click)="decrementQuantity()"></i>
+            <span class="font-weight-bold" style="font-size: 1.5em;">{{quantity}}</span>
+            <i class="fa fa-plus-circle text-warning" style="cursor: pointer; font-size: 2em; margin: 0 2% 0 2%;" (click)="incrementQuantity()"></i>
+            <button class="btn btn-outline-primary btn-lg" (click)="addItemToCart()">Add to Cart</button>
+        </div>
+    </div>
+    <div class="row mt-5">
+        <div class="col-12 ml-3">
+            <h4>Description</h4>
+            <p>{{product.description}}</p>
+        </div>
+    </div>
+</div>
